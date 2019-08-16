@@ -20,6 +20,8 @@ module.exports = {
       directory: './migrations'
     },
     useNullAsDefault: true
+  },
+  seeds: {
+    directory: './seeds/dev'
   }
-
 };
