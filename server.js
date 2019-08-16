@@ -11,7 +11,11 @@ app.locals.title = "Mystery Authors & Books"
 app.get('/api/v1/authors', (request, response) => {
   database('authors').select()
   .then((authors) => {
+    if(authors.length) {
     response.status(200).json(authors);
+    } else {
+      response.status(404).json('No authors found')
+    }
   })
   .catch((error) => {
     response.status(500).json({ error });
@@ -60,7 +64,11 @@ app.post('/api/v1/authors', (request, response) => {
 app.get('/api/v1/authors/:id/books', (request, response) => {
   database('books').where('author_id', request.params.id).select()
     .then((books) => {
+      if(books.length) {
       response.status(200).json(books)
+      } else {
+        response.status(404).json('No books found for this author')
+      }
     })
       .catch((error) => {
         response.status(500).json({ error});
@@ -70,7 +78,11 @@ app.get('/api/v1/authors/:id/books', (request, response) => {
 app.get('/api/v1/authors/:id/books/:book_id', (request, response) => {
   database('books').where('author_id', request.params.id).andWhere('id', request.params.book_id).select()
     .then((books) => {
+      if(books.length) {
       response.status(200).json(books)
+      } else {
+        response.status(404).json('No book with this ID was found')
+      }
     })
       .catch((error) => {
         response.status(500).json({ error })
