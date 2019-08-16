@@ -18,7 +18,6 @@ app.get('/api/v1/authors', (request, response) => {
   });
 })
 
-
 app.get('/api/v1/authors/:id', (request, response) => {
   database('authors').where('id', request.params.id).select()
     .then((authors) => {
@@ -35,6 +34,7 @@ app.get('/api/v1/authors/:id', (request, response) => {
   })
 });
 
+//AUTHOR POST
 app.post('/api/v1/authors', (request, response) => {
   let author = request.body;
 
@@ -77,6 +77,40 @@ app.get('/api/v1/authors/:id/books/:book_id', (request, response) => {
       })
 })
 
+//BOOK POST - make sure it is adding an author id!!
+app.post('/api/v1/authors/:id/books', (request, response) => {
+  let book = request.body;
+
+  for (let requiredParameter of ['title', 'publication_year']) {
+    if (!book[requiredParameter]) {
+      return response
+        .status(422)
+        .send({ error: `Expected format: { title: <String>, publication_year: <Integer>}. You're missing a "${requiredParameter}" property.` });
+    }
+  }
+
+  database('books').where('author_id', request.params.id).insert(book, 'id', 'author_id')
+    .then(book => {
+      response.status(201).json({ id: book[0] })
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
+
+  })
+
+  //DELETE FOR AUTHOR - NEEDS TO ALSO DELETE AUTHORS BOOKS - IF ELSE FOR A 404??
+app.delete('/api/v1/authors/:id', (request, response) => {
+
+  const deletePromises = [database('authors').where('id', request.params.id).del(), database('books').where('author_id', request.params.id).del()]
+  Promise.all(deletePromises)
+  .then((books) => {
+    response.status(201).json(`Author with id ${request.params.id} has been deleted.`)
+  })
+  .catch(error => {
+    response.status(500).json({ error });
+  })
+});
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on http://localhost:${app.get('port')}.`);
