@@ -3,6 +3,7 @@ const configuration = require('./knexfile')[environment]
 const database = require('knex')(configuration)
 const express = require('express');
 const app = express();
+app.use(express.json());
 
 app.set('port', process.env.PORT || 3000);
 app.locals.title = "Mystery Authors & Books"
@@ -34,6 +35,27 @@ app.get('/api/v1/authors/:id', (request, response) => {
   })
 });
 
+app.post('/api/v1/authors', (request, response) => {
+  let author = request.body;
+
+  for (let requiredParameter of ['first_name', 'last_name', 'birth_year']) {
+    if (!author[requiredParameter]) {
+      return response
+        .status(422)
+        .send({ error: `Expected format: { first_name: <String>, last_name: <String>, birth_year: <Integer>}. You're missing a "${requiredParameter}" property.` });
+    }
+  }
+
+  database('authors').insert(author, 'id')
+    .then(author => {
+      response.status(201).json({ id: author[0] })
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
+
+  })
+  
 
 app.get('/api/v1/authors/:id/books', (request, response) => {
   database('books').where('author_id', request.params.id).select()

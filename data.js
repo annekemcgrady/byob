@@ -1,4 +1,4 @@
-const books =  [
+const authors =  [
   {first_name: 'Tana',
   last_name: 'French',
   birth_year: 1977,
@@ -332,4 +332,4 @@ const books =  [
   }
 ]
 
-module.exports = books;
+module.exports = authors;
