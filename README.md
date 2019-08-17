@@ -1,15 +1,11 @@
-- Endpoints available (e.g. GET /api/v1/students, POST api/v1/students)
-- What parameters can be used in certain requests (e.g. For a POST request, what should be put in the request body?)
-- Sample responses from endpoints (What does the response object look like for a request?)
-
-#BOOKS AND AUTHORS API SCHEMA
+# BOOKS AND AUTHORS API SCHEMA
 
 This API contains data on fiction authors and books by each author. New authors and new books by those authors can be added to the database.  An author and their books can also be removed from the database. All API access is over HTTP. All data is sent and received as JSON.
 
-**The base URL for HTTP access is:**
+**The base URL for HTTP access is:**   
 `http://authorsandbooks.herokuapp.com`
 
-#AUTHOR DATA ENDPOINTS
+## AUTHOR DATA ENDPOINTS
 
 **To GET a list of authors:**
 
@@ -21,7 +17,7 @@ This API contains data on fiction authors and books by each author. New authors 
 
 *Example response:*
 
-`200 OK
+```200 OK
 [
     {
         "id": 1,
@@ -47,7 +43,7 @@ This API contains data on fiction authors and books by each author. New authors 
         "created_at": "2019-08-16T16:14:45.630Z",
         "updated_at": "2019-08-16T16:14:45.630Z"
     }
-  ]`
+  ]```
 
 **To GET a specific author:**
 
@@ -55,11 +51,11 @@ This API contains data on fiction authors and books by each author. New authors 
 
 *Example request:*
 
-`GET api/v1/authors/10`
+`GET /api/v1/authors/10`
 
 *Example response:*
 
-`200 OK
+```200 OK
 
 [
     {
@@ -70,7 +66,7 @@ This API contains data on fiction authors and books by each author. New authors 
         "created_at": "2019-08-16T16:14:45.646Z",
         "updated_at": "2019-08-16T16:14:45.646Z"
     }
-]`
+]```
 
 //FINISH POST AUTHOR AND BOOKS AND DELETE
 **To POST a new author:**
@@ -83,29 +79,29 @@ This API contains data on fiction authors and books by each author. New authors 
 
 REQURIRED PARAMETERS: 
 
-`Body: 
+```Body: 
 {
   first_name: <String>,
   last_name:<String>,
   birth_year:<Integer>
-}`
+}```
 
 *Example response:*
 
 
 To DELETE an author and all associated books:
 
-`api/v1/authors/<AUTHOR_ID>`
+`/api/v1/authors/<AUTHOR_ID>`
 
 *Example request:*
 
-`DELATE api/v1/authors/10`
+`DELETE /api/v1/authors/10`
 
 *Example response:*
 
 `Author with ID 10 has been deleted'
 
-#BOOK DATA ENPOINTS
+## BOOK DATA ENPOINTS
 
 **To GET a list of books by a specific author:**
 
@@ -117,7 +113,7 @@ To DELETE an author and all associated books:
 
 *Example response:*
 
-`200 OK 
+```200 OK 
 
 [
     {
@@ -144,7 +140,7 @@ To DELETE an author and all associated books:
         "created_at": "2019-08-16T16:14:45.697Z",
         "updated_at": "2019-08-16T16:14:45.697Z"
     }
-]`
+]```
 
 **To GET a specific book by an author:**
 
@@ -157,7 +153,7 @@ To DELETE an author and all associated books:
 *Example response:*
 
 
-`200 OK
+```200 OK
 
 [
     {
@@ -168,7 +164,7 @@ To DELETE an author and all associated books:
         "created_at": "2019-08-16T16:14:45.697Z",
         "updated_at": "2019-08-16T16:14:45.697Z"
     }
-]`
+]```
 
 **To POST a new book by a specific author(author must exist in database):**
 
@@ -180,11 +176,12 @@ To DELETE an author and all associated books:
 
 REQURIRED PARAMETERS: 
 
-Body:
+```Body:
  {
   title: <String>,
   publication_year: <Integer>
 }
+```
 
 *Example response:*
 
