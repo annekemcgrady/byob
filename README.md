@@ -78,7 +78,7 @@ This API contains data on fiction authors and books by each author. New authors 
 
 `POST /api/v1/authors`
 
-REQURIRED PARAMETERS: 
+REQUIRED PARAMETERS: 
 
 ```
 Headers:  "Content-Type": "application/json"
@@ -117,7 +117,7 @@ Body:
 Author with id 10 has been deleted.
 ```
 
-## BOOK DATA ENPOINTS
+## BOOK DATA ENDPOINTS
 
 **To GET a list of books by a specific author:**
 
@@ -194,7 +194,7 @@ Author with id 10 has been deleted.
 
 `/api/v1/authors/2/books`
 
-REQURIRED PARAMETERS: 
+REQUIRED PARAMETERS: 
 
 ```
 Headers:  "Content-Type": "application/json"
@@ -203,7 +203,7 @@ Body:
  {
   "title": <String>,
   "publication_year": <Integer>,
-  "author_id": <author_id>
+  "author_id": <AUTHOR_ID>
 }
 ```
 
