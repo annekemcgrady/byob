@@ -1,4 +1,4 @@
-# BOOKS AND AUTHORS API SCHEMA
+# BOOKS AND AUTHORS API 
 
 This API contains data on fiction authors and books by each author. New authors and new books by those authors can be added to the database.  An author and their books can also be removed from the database. All API access is over HTTP. All data is sent and received as JSON.
 

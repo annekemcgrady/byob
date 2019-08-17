@@ -38,7 +38,6 @@ app.get('/api/v1/authors/:id', (request, response) => {
   })
 });
 
-//AUTHOR POST
 app.post('/api/v1/authors', (request, response) => {
   let author = request.body;
 
@@ -60,7 +59,6 @@ app.post('/api/v1/authors', (request, response) => {
 
   })
   
-
 app.get('/api/v1/authors/:id/books', (request, response) => {
   database('books').where('author_id', request.params.id).select()
     .then((books) => {
@@ -89,7 +87,6 @@ app.get('/api/v1/authors/:id/books/:book_id', (request, response) => {
       })
 })
 
-//BOOK POST 
 app.post('/api/v1/authors/:id/books', (request, response) => {
   let book = request.body;
 
@@ -97,7 +94,7 @@ app.post('/api/v1/authors/:id/books', (request, response) => {
     if (!book[requiredParameter]) {
       return response
         .status(422)
-        .send({ error: `Expected format: { title: <String>, publication_year: <Integer>}. You're missing a "${requiredParameter}" property.` });
+        .send({ error: `Expected format: { title: <String>, publication_year: <Integer>, author_id: <Integer>}. You're missing a "${requiredParameter}" property.` });
     }
   }
 
@@ -111,10 +108,9 @@ app.post('/api/v1/authors/:id/books', (request, response) => {
 
   })
 
-  //DELETE FOR AUTHOR - NEEDS TO ALSO DELETE AUTHORS BOOKS - IF ELSE FOR A 404??
 app.delete('/api/v1/authors/:id', (request, response) => {
 
-  const deletePromises = [database('authors').where('id', request.params.id).del(), database('books').where('author_id', request.params.id).del()]
+  const deletePromises = [database('books').where('author_id', request.params.id).del(), database('authors').where('id', request.params.id).del()]
   Promise.all(deletePromises)
   .then((authors) => {
     response.status(201).json(`Author with id ${request.params.id} has been deleted.`)
