@@ -43,7 +43,8 @@ This API contains data on fiction authors and books by each author. New authors 
         "created_at": "2019-08-16T16:14:45.630Z",
         "updated_at": "2019-08-16T16:14:45.630Z"
     }
-  ]```
+  ]
+  ```
 
 **To GET a specific author:**
 
@@ -66,9 +67,9 @@ This API contains data on fiction authors and books by each author. New authors 
         "created_at": "2019-08-16T16:14:45.646Z",
         "updated_at": "2019-08-16T16:14:45.646Z"
     }
-]```
+]
+```
 
-//FINISH POST AUTHOR AND BOOKS AND DELETE
 **To POST a new author:**
 
 `/api/v1/authors`
@@ -79,23 +80,26 @@ This API contains data on fiction authors and books by each author. New authors 
 
 REQURIRED PARAMETERS: 
 
-```Headers:  "Content-Type": "application/json"
+```
+Headers:  "Content-Type": "application/json"
 
 Body: 
 {
   "first_name": <String>,
   "last_name":<String>,
   "birth_year":<Integer>
-}```
+}
+```
 
 *Example response:*
 
-```201 Created
+```
+201 Created
 
 {
   "id": 46
-}```
-
+}
+```
 
 **To DELETE an author and all associated books:**
 
@@ -107,9 +111,11 @@ Body:
 
 *Example response:*
 
-```201 Created
+```
+201 Created
 
-Author with id 10 has been deleted.```
+Author with id 10 has been deleted.
+```
 
 ## BOOK DATA ENPOINTS
 
@@ -123,7 +129,8 @@ Author with id 10 has been deleted.```
 
 *Example response:*
 
-```200 OK 
+```
+200 OK 
 
 [
     {
@@ -150,7 +157,8 @@ Author with id 10 has been deleted.```
         "created_at": "2019-08-16T16:14:45.697Z",
         "updated_at": "2019-08-16T16:14:45.697Z"
     }
-]```
+]
+```
 
 **To GET a specific book by an author:**
 
@@ -163,7 +171,8 @@ Author with id 10 has been deleted.```
 *Example response:*
 
 
-```200 OK
+```
+200 OK
 
 [
     {
@@ -174,7 +183,8 @@ Author with id 10 has been deleted.```
         "created_at": "2019-08-16T16:14:45.697Z",
         "updated_at": "2019-08-16T16:14:45.697Z"
     }
-]```
+]
+```
 
 **To POST a new book by a specific author(author must exist in database):**
 
@@ -186,7 +196,8 @@ Author with id 10 has been deleted.```
 
 REQURIRED PARAMETERS: 
 
-```Headers:  "Content-Type": "application/json"
+```
+Headers:  "Content-Type": "application/json"
 
 Body:
  {
@@ -198,8 +209,10 @@ Body:
 
 *Example response:*
 
-```201 Created
+```
+201 Created
 
 {
     "id": 96
-}```
+}
+```
