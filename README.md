@@ -79,17 +79,25 @@ This API contains data on fiction authors and books by each author. New authors 
 
 REQURIRED PARAMETERS: 
 
-```Body: 
+```Headers:  "Content-Type": "application/json"
+
+Body: 
 {
-  first_name: <String>,
-  last_name:<String>,
-  birth_year:<Integer>
+  "first_name": <String>,
+  "last_name":<String>,
+  "birth_year":<Integer>
 }```
 
 *Example response:*
 
+```201 Created
 
-To DELETE an author and all associated books:
+{
+  "id": 46
+}```
+
+
+**To DELETE an author and all associated books:**
 
 `/api/v1/authors/<AUTHOR_ID>`
 
@@ -99,7 +107,9 @@ To DELETE an author and all associated books:
 
 *Example response:*
 
-`Author with ID 10 has been deleted'
+```201 Created
+
+Author with id 10 has been deleted.```
 
 ## BOOK DATA ENPOINTS
 
@@ -176,13 +186,20 @@ To DELETE an author and all associated books:
 
 REQURIRED PARAMETERS: 
 
-```Body:
+```Headers:  "Content-Type": "application/json"
+
+Body:
  {
-  title: <String>,
-  publication_year: <Integer>
+  "title": <String>,
+  "publication_year": <Integer>,
+  "author_id": <author_id>
 }
 ```
 
 *Example response:*
 
+```201 Created
 
+{
+    "id": 96
+}```

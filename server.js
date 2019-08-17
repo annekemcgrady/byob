@@ -89,11 +89,11 @@ app.get('/api/v1/authors/:id/books/:book_id', (request, response) => {
       })
 })
 
-//BOOK POST - make sure it is adding an author id!!
+//BOOK POST 
 app.post('/api/v1/authors/:id/books', (request, response) => {
   let book = request.body;
 
-  for (let requiredParameter of ['title', 'publication_year']) {
+  for (let requiredParameter of ['title', 'publication_year', 'author_id']) {
     if (!book[requiredParameter]) {
       return response
         .status(422)
@@ -101,7 +101,7 @@ app.post('/api/v1/authors/:id/books', (request, response) => {
     }
   }
 
-  database('books').where('author_id', request.params.id).insert(book, 'id', 'author_id')
+  database('books').where('author_id', request.params.id).insert(book, 'id')
     .then(book => {
       response.status(201).json({ id: book[0] })
     })
@@ -116,7 +116,7 @@ app.delete('/api/v1/authors/:id', (request, response) => {
 
   const deletePromises = [database('authors').where('id', request.params.id).del(), database('books').where('author_id', request.params.id).del()]
   Promise.all(deletePromises)
-  .then((books) => {
+  .then((authors) => {
     response.status(201).json(`Author with id ${request.params.id} has been deleted.`)
   })
   .catch(error => {
